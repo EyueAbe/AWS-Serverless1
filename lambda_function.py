@@ -2,105 +2,96 @@ import json
 import boto3
 import os
 
-# Initialize Bedrock Runtime client
-bedrock_runtime = boto3.client(
-    service_name="bedrock-runtime",
-    region_name=os.environ.get("AWS_REGION", "us-east-1")
-)
+# Initialize the Bedrock client
+bedrock = boto3.client(service_name='bedrock-runtime')
+
+SYSTEM_PROMPT = """You are Cloudy, a friendly and knowledgeable AWS guide and tutor. Your personality is warm, encouraging, and casual. Like a senior engineer who genuinely loves helping people learn AWS.
+
+Your expertise covers:
+- **Getting Started with AWS**: Helping complete beginners understand what AWS is, how to create an account, navigate the console, and understand core concepts like regions, availability zones, and the free tier.
+- **Hands-on Projects**: Walking users through real AWS projects step by step — serverless apps, static websites, databases, APIs, containers, CI/CD pipelines, and more.
+- **AWS Certifications**: Guiding users through all AWS certification paths (Cloud Practitioner, Solutions Architect, Developer, SysOps, DevOps, Specialty certs). Explaining what to study, recommending resources, sharing exam tips, and helping with practice questions.
+- **Troubleshooting**: Helping debug common AWS errors, IAM permission issues, networking problems, and service misconfigurations.
+- **Best Practices**: Advising on cost optimization, security, scalability, and the Well-Architected Framework.
+
+Guidelines:
+- Always be encouraging, AWS can be overwhelming and users need confidence.
+- Use simple analogies to explain complex concepts.
+- When walking through steps, be specific and clear.
+- If a user seems to be a beginner, slow down and explain fundamentals.
+- If a user is advanced, match their level and go deeper.
+- Always be honest if you're unsure about something — AWS updates frequently.
+- Occasionally add a friendly tip or fun fact about AWS.
+- Keep responses focused and not too long unless a detailed explanation is needed.
+
+Remember: Your goal is to make AWS accessible, fun, and learnable for everyone, from total beginners to engineers studying for advanced certs."""
 
 
 def lambda_handler(event, context):
-    """
-    AWS Lambda handler for a serverless chatbot backend.
-
-    Flow:
-    1. Receives a POST request from API Gateway
-    2. Extracts the user's prompt and optional conversation history
-    3. Sends the request to Amazon Bedrock
-    4. Returns the model response back through API Gateway
-    """
-
     try:
-        # Parse request body
-        body = json.loads(event.get("body", "{}"))
+        # Parse the incoming request body
+        if isinstance(event.get('body'), str):
+            body = json.loads(event['body'])
+        else:
+            body = event.get('body', event)
 
-        input_text = body.get("prompt", "").strip()
-        conversation_history = body.get("conversation_history", "[]")
+        # Support both single prompt and conversation history
+        messages = body.get('messages', None)
+        prompt = body.get('prompt', None)
 
-        # Validate required input
-        if not input_text:
+        # Build messages array
+        if messages:
+            formatted_messages = messages
+        elif prompt:
+            formatted_messages = [{"role": "user", "content": prompt}]
+        else:
             return {
-                "statusCode": 400,
-                "headers": {
-                    "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "*"
+                'statusCode': 400,
+                'headers': {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers': '*',
+                    'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
                 },
-                "body": json.dumps({
-                    "error": "Missing required field: prompt"
-                })
+                'body': json.dumps({'error': 'No prompt or messages provided'})
             }
 
-        # Use environment variable if provided, otherwise default model ID
-        model_id = os.environ.get(
-            "BEDROCK_MODEL_ID",
-            "us.anthropic.claude-opus-4-20250514-v1:0"
-        )
+        # Call Bedrock
+        model_id = os.environ.get('BEDROCK_MODEL_ID', 'us.anthropic.claude-haiku-4-5-20251001')
 
-        # Build message content
-        user_message = (
-            "Here is the conversation history:\n"
-            f"{conversation_history}\n\n"
-            "Here is the new user input:\n"
-            f"{input_text}"
-        )
-
-        # Prepare Bedrock request body
-        request_body = {
-            "anthropic_version": "bedrock-2023-05-31",
-            "max_tokens": 2000,
-            "messages": [
-                {
-                    "role": "user",
-                    "content": user_message
-                }
-            ]
-        }
-
-        # Invoke Bedrock model
-        response = bedrock_runtime.invoke_model(
+        response = bedrock.invoke_model(
             modelId=model_id,
-            contentType="application/json",
-            accept="application/json",
-            body=json.dumps(request_body)
+            body=json.dumps({
+                "anthropic_version": "bedrock-2023-05-31",
+                "max_tokens": 1024,
+                "system": SYSTEM_PROMPT,
+                "messages": formatted_messages
+            })
         )
 
-        # Parse model response
-        response_body = json.loads(response["body"].read())
-        generated_text = response_body["content"][0]["text"]
+        response_body = json.loads(response['body'].read())
+        reply = response_body['content'][0]['text']
 
-        # Return successful response
         return {
-            "statusCode": 200,
-            "headers": {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
+            'statusCode': 200,
+            'headers': {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
             },
-            "body": json.dumps({
-                "response": generated_text,
-                "model_id": model_id
-            })
+            'body': json.dumps({'response': reply})
         }
 
     except Exception as e:
         print(f"Error: {str(e)}")
         return {
-            "statusCode": 500,
-            "headers": {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
+            'statusCode': 500,
+            'headers': {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
             },
-            "body": json.dumps({
-                "error": "Internal server error",
-                "message": str(e)
-            })
+            'body': json.dumps({'error': str(e)})
         }
