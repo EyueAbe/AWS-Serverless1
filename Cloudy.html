@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cloudy — Your AWS Guide</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Bagel+Fat+One&display=swap" rel="stylesheet"/>
   <script src="https://cdn.jsdelivr.net/npm/amazon-cognito-identity-js@6/dist/amazon-cognito-identity.min.js"></script>
   <style>
     * {
@@ -16,13 +15,13 @@
     body {
       background-color: #0a0e1a;
       color: #e2e8f0;
-      font-family: 'Syne', sans-serif;
+      font-family: 'Inter', sans-serif;
       height: 100vh;
       display: flex;
       flex-direction: column;
       overflow: hidden;
     }
-
+    .logo-title,.auth-logo h1, #welcome h2 {font-family: 'Bagel Fat One', cursive;}
     /* AUTH SCREEN */
     #auth-screen {
       position: fixed;
@@ -46,18 +45,21 @@
 
     .auth-logo {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .auth-logo .icon {
-      font-size: 42px;
+      font-size: 56px;
       display: block;
+      margin-bottom: 4px;
+      line-height: 1;
+      animation: floatCloud 2.8s ease-in-out infinite;
     }
 
     .auth-logo h1 {
-      font-size: 1.6rem;
-      font-weight: 800;
-      margin-top: 10px;
+      font-size: 2rem;
+      font-weight: 650;
+      margin-top: 0px;
     }
 
     .auth-logo h1 span {
@@ -67,7 +69,7 @@
     .auth-logo p {
       font-size: 0.78rem;
       color: #64748b;
-      font-family: 'Space Mono', monospace;
+      font-family: 'Open Sans', monospace;
       margin-top: 4px;
     }
 
@@ -87,8 +89,8 @@
       border-radius: 8px;
       background-color: transparent;
       color: #64748b;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
+      font-family: 'Open Sans', monospace;
+      font-size: 0.88rem;
       cursor: pointer;
     }
 
@@ -100,8 +102,8 @@
 
     .field-label {
       display: block;
-      font-size: 0.72rem;
-      font-family: 'Space Mono', monospace;
+      font-size: 0.88rem;
+      font-family: 'Open Sans', monospace;
       color: #64748b;
       margin-bottom: 6px;
     }
@@ -124,7 +126,7 @@
 
     .submit-btn {
       width: 100%;
-      padding: 12px;
+      padding: 10px;
       background-color: #f59e0b;
       border: none;
       border-radius: 10px;
@@ -147,9 +149,9 @@
     .divider {
       text-align: center;
       color: #64748b;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
-      margin: 18px 0;
+      font-family: 'Open Sans', monospace;
+      font-size: 0.88rem;
+      margin: 12px 0;
     }
 
     .guest-btn {
@@ -159,8 +161,8 @@
       border: 1px solid #1e2d47;
       border-radius: 10px;
       color: #64748b;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
+      font-family: 'Open Sans', monospace;
+      font-size: 0.9rem;
       cursor: pointer;
     }
 
@@ -171,7 +173,7 @@
 
     #auth-message {
       font-size: 0.75rem;
-      font-family: 'Space Mono', monospace;
+      font-family: 'Open Sans', monospace;
       text-align: center;
       margin-top: 12px;
       min-height: 20px;
@@ -194,22 +196,35 @@
     }
 
     .logo-box {
-      width: 40px;
-      height: 40px;
+      width: 46px;
+      height: 46px;
       background-color: #f59e0b;
-      border-radius: 12px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+    }
+
+    .logo-cloud {
+      display: inline-block;
+      font-size: 43px;
+      line-height: 1;
+      animation: floatCloud 2.8s ease-in-out infinite;
     }
 
     .logo-title {
-      font-size: 1.15rem;
-      font-weight: 800;
+      font-size: 1rem;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      margin-top: -5px;
+    }
+
+    .cloudy-word {
+      font-family: 'Bagel Fat One';
     }
 
     .logo-title span {
+      font-size: 2.5rem;
       color: #f59e0b;
     }
 
@@ -225,8 +240,8 @@
       border: 1px solid #34d399;
       border-radius: 999px;
       padding: 5px 12px;
-      font-size: 0.68rem;
-      font-family: 'Space Mono', monospace;
+      font-size: 0.95rem;
+      font-family: 'Open Sans', monospace;
       color: #34d399;
     }
 
@@ -235,8 +250,8 @@
       border: 1px solid #1e2d47;
       border-radius: 6px;
       color: #64748b;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
+      font-family: 'Open Sans', monospace;
+      font-size: 0.95rem;
       padding: 4px 10px;
       cursor: pointer;
     }
@@ -252,8 +267,9 @@
       gap: 8px;
       padding: 10px 20px;
       background-color: #111827;
-      border-bottom: 1px solid #1e2d47;
       overflow-x: auto;
+      justify-content: center;
+
     }
 
     .chip {
@@ -263,7 +279,7 @@
       border-radius: 999px;
       padding: 5px 14px;
       font-size: 0.72rem;
-      font-family: 'Space Mono', monospace;
+      font-family: 'Open Sans', monospace;
       color: #64748b;
       cursor: pointer;
       white-space: nowrap;
@@ -281,7 +297,8 @@
       padding: 24px 20px;
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 22px;
+      align-items: center;
     }
 
     #welcome {
@@ -296,12 +313,15 @@
     }
 
     #welcome .big-icon {
-      font-size: 52px;
+      font-size: 80px;
+      margin-bottom: -25px;
+      animation: floatCloud 2.8s ease-in-out infinite;
     }
 
     #welcome h2 {
-      font-size: 1.8rem;
-      font-weight: 800;
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-top: -5px;
     }
 
     #welcome h2 span {
@@ -321,7 +341,7 @@
       border-radius: 8px;
       padding: 6px 12px;
       font-size: 0.72rem;
-      font-family: 'Space Mono', monospace;
+      font-family: 'Open Sans', monospace;
       color: #64748b;
     }
 
@@ -329,10 +349,14 @@
     .msg-row {
       display: flex;
       gap: 12px;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 900px;
     }
 
     .msg-row.user {
       flex-direction: row-reverse;
+      justify-content: flex-start;
     }
 
     .msg-avatar {
@@ -349,63 +373,111 @@
 
     .msg-avatar.bot  { background-color: #f59e0b; }
     .msg-avatar.user { background-color: #38bdf8; }
+    .msg-row.user .msg-avatar {display: none;}
+
 
     .msg-bubble {
-      max-width: 80%;
-      padding: 14px 16px;
-      border-radius: 14px;
-      font-size: 0.88rem;
-      line-height: 1.65;
+      font-size: 1rem;
+      line-height: 1.75;
+      font-family: 'Inter', sans-serif;
     }
 
     .msg-bubble.bot {
-      background-color: #141e2f;
-      border: 1px solid #1e2d47;
-      border-top-left-radius: 4px;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      max-width: 78%;
     }
 
     .msg-bubble.user {
+      max-width: 70%;
       background-color: #1e3a5f;
       border: 1px solid #1e4a6f;
-      border-top-right-radius: 4px;
+      border-radius: 24px;
+      padding: 12px 16px;
     }
 
     .msg-name {
-      font-size: 0.67rem;
-      font-family: 'Space Mono', monospace;
-      margin-bottom: 6px;
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      margin-bottom: 10px;
+      font-weight: 600;
     }
 
-    .msg-bubble.bot  .msg-name { color: #f59e0b; }
-    .msg-bubble.user .msg-name { color: #38bdf8; text-align: right; }
+    .msg-bubble.bot .msg-name {
+      color: #f59e0b;
+    }
 
-    .msg-bubble strong { color: #f59e0b; }
+    .msg-bubble.user .msg-name {
+      color: #38bdf8;
+      text-align: right;
+    }
+
+    .msg-bubble .heading {
+      display: block;
+      font-weight: 700;
+      font-size: 1.15rem;
+      line-height: 1.4;
+      margin: 24px 0 12px 0;
+      padding: 0;
+    }
+
+    .msg-bubble p {
+      margin: 0 0 14px 0;
+    }
+
+    .msg-bubble p:last-child {
+      margin-bottom: 0;
+    }
+
+    .msg-bubble ul {
+      margin: 10px 0 18px 0;
+      padding-left: 22px;
+    }
+
+    .msg-bubble li {
+      margin: 0 0 10px 0;
+      line-height: 1.7;
+    }
+
+    .msg-bubble strong {
+      font-weight: 700;
+      color: #f8fafc;
+    }
+
     .msg-bubble code {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.8em;
+      font-family: monospace;
+      font-size: 0.85em;
       background-color: #0d1526;
       border-radius: 5px;
       padding: 1px 6px;
       color: #34d399;
     }
+
     .msg-bubble pre {
       background-color: #0d1526;
       border-radius: 8px;
       padding: 12px;
       overflow-x: auto;
       margin: 8px 0;
-      font-family: 'Space Mono', monospace;
+      font-family: 'Open Sans', monospace;
       font-size: 0.78em;
       color: #34d399;
     }
-    .msg-bubble ul, .msg-bubble ol { padding-left: 18px; margin: 6px 0; }
-    .msg-bubble li { margin-bottom: 4px; }
-    .msg-bubble p  { margin-bottom: 8px; }
-    .msg-bubble p:last-child { margin-bottom: 0; }
+    
+    .msg-bubble p { margin: 0 0 14px 0;}
+    .msg-bubble p:last-child { margin-bottom: 0;}
+    .msg-bubble ul, .msg-bubble ol {padding-left: 24px;margin: 10px 0 16px 0;}
+    .msg-bubble li {margin-bottom: 10px; line-height: 1.6; }
+    .msg-bubble li p { margin-bottom: 0; }
+    .msg-bubble ul,.bot-response ul { margin: 10px 0 16px 0; padding-left: 22px;}
+    .msg-bubble li,.bot-response li { margin: 0 0 10px 0; line-height: 1.65;}
+    .msg-content { width: 100%;}
 
     .save-note {
       font-size: 0.62rem;
-      font-family: 'Space Mono', monospace;
+      font-family: 'Open Sans', monospace;
       color: #34d399;
       opacity: 0.7;
       margin-top: 4px;
@@ -439,26 +511,22 @@
       0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
       30%            { transform: translateY(-6px); opacity: 1; }
     }
-
-    /* INPUT AREA */
-    .input-area {
-      padding: 14px 20px 18px;
-      background-color: #111827;
-      border-top: 1px solid #1e2d47;
+    @keyframes floatCloud {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
     }
 
+    /* INPUT AREA */
     .input-row {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       gap: 10px;
       background-color: #1a2236;
       border: 1px solid #1e2d47;
-      border-radius: 14px;
+      border-radius: 16px;
       padding: 10px 12px;
-    }
-
-    .input-row:focus-within {
-      border-color: #f59e0b;
+      max-width: 830px;
+      margin: 0 auto;
     }
 
     #user-input {
@@ -467,28 +535,23 @@
       border: none;
       outline: none;
       color: #e2e8f0;
-      font-family: 'Syne', sans-serif;
+      font-family: 'Open Sans', sans-serif;
       font-size: 0.88rem;
       resize: none;
-      max-height: 140px;
-      line-height: 1.5;
-    }
-
-    #user-input::placeholder {
-      color: #64748b;
+      max-height: 120px;
+      min-height: 20px;
+      line-height: 1.35;
     }
 
     #send-btn {
-      width: 38px;
-      height: 38px;
-      background-color: #f59e0b;
-      border: none;
+      width: 34px;
+      height: 34px;
       border-radius: 10px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      background-color: #f59e0b;
+    }
+
+    .input-row {
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
     }
 
     #send-btn:hover   { background-color: #f97316; }
@@ -496,21 +559,22 @@
     #send-btn svg { width: 18px; height: 18px; fill: #0a0e1a; }
 
     .input-footer {
+      max-width: 820px;
+      margin: 6px auto 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 8px;
     }
 
     .hint-text {
       font-size: 0.67rem;
-      font-family: 'Space Mono', monospace;
+      font-family: 'Open Sans', monospace;
       color: #64748b;
     }
 
     #msg-count {
       font-size: 0.67rem;
-      font-family: 'Space Mono', monospace;
+      font-family: 'Open Sans', monospace;
       color: #38bdf8;
       background-color: #0a1a2a;
       border: 1px solid #1e3a5f;
@@ -523,7 +587,7 @@
       border: 1px solid #1e2d47;
       border-radius: 6px;
       color: #64748b;
-      font-family: 'Space Mono', monospace;
+      font-family: 'Open Sans', monospace;
       font-size: 0.67rem;
       padding: 3px 10px;
       cursor: pointer;
@@ -543,14 +607,14 @@
 
     <div class="auth-logo">
       <span class="icon">☁️</span>
-      <h1>Hey I'm <span>Cloudy</span></h1>
-      <p>your AWS guide</p>
+      <h1>Hey I'm <span class="cloudy-word">Cloudy</span></h1>
+      <p>Your AWS guide</p>
     </div>
 
     <!-- Sign In / Sign Up tabs -->
     <div class="auth-tabs">
-      <button class="auth-tab active" onclick="showTab('login')">Sign In</button>
-      <button class="auth-tab"        onclick="showTab('signup')">Create Account</button>
+      <button class="auth-tab active" id="tab-login"  onclick="showTab('login')">Sign In</button>
+      <button class="auth-tab"        id="tab-signup" onclick="showTab('signup')">Create Account</button>
     </div>
 
     <!-- Login form -->
@@ -574,7 +638,7 @@
 
     <!-- Verify email form -->
     <div id="verify-form" style="display:none">
-      <p style="font-size:0.8rem;color:#64748b;font-family:'Space Mono',monospace;margin-bottom:16px;text-align:center">
+      <p style="font-size:0.8rem;color:#64748b;font-family:'Open Sans',monospace;margin-bottom:16px;text-align:center">
         Check your email for a verification code
       </p>
       <label class="field-label">Verification Code</label>
@@ -586,15 +650,17 @@
     <div id="auth-message"></div>
 
     <div class="divider">— or —</div>
-    <button class="guest-btn" onclick="guestMode()">Continue as Guest — no account needed</button>
+    <button class="guest-btn" onclick="guestMode()">Continue as Guest</button>
 
   </div>
 </div>
 
 <!-- MAIN APP -->
 <header>
-  <div class="logo-box">☁️</div>
-  <div class="logo-title">Cloudy <span>//</span> AWS Guide</div>
+  <div class="logo-box"><span class="logo-cloud">☁️</span></div>
+  <div class="logo-title">
+    <span class="cloudy-word">Cloudy</span> <span> </span> (Powered by AWS)
+  </div>
   <div class="header-right">
     <div id="user-badge">online</div>
     <button id="logout-btn" onclick="logout()">sign out</button>
@@ -602,4 +668,408 @@
 </header>
 
 <div class="topic-bar">
-  <di
+  <div class="chip" onclick="sendQuick('I am brand new to AWS. Where do I start?')">🚀 Getting Started</div>
+  <div class="chip" onclick="sendQuick('What AWS certifications should I pursue and in what order?')">🏆 Certifications</div>
+  <div class="chip" onclick="sendQuick('Give me a beginner AWS project I can build today.')">🔨 Project Ideas</div>
+  <div class="chip" onclick="sendQuick('Explain the AWS free tier and what I can use for free.')">💸 Free Tier</div>
+  <div class="chip" onclick="sendQuick('What is the difference between EC2, Lambda, and ECS?')">⚡ Compute</div>
+  <div class="chip" onclick="sendQuick('Help me understand IAM roles and policies.')">🔐 IAM & Security</div>
+  <div class="chip" onclick="sendQuick('What should I know about AWS networking and VPCs?')">🌐 Networking</div>
+  <div class="chip" onclick="sendQuick('Tips for passing the AWS Cloud Practitioner exam.')">📋 CLF-C02 Tips</div>
+</div>
+
+<div id="chat-box">
+  <div id="welcome">
+    <div class="big-icon">☁️</div>
+    <h2>Hey I'm <span class="cloudy-word">Cloudy</span></h2>
+    <div class="tag-row">
+      <span class="tag">🟠 Getting Started</span>
+      <span class="tag">🔵 Certifications</span>
+      <span class="tag">🟢 Hands-on Projects</span>
+      <span class="tag">🟡 Troubleshooting</span>
+      <span class="tag">⚪ Best Practices</span>
+    </div>
+  </div>
+</div>
+
+<div class="input-area">
+  <div class="input-row">
+    <textarea id="user-input" placeholder="Ask me anything…" rows="1"></textarea>
+    <button id="send-btn">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+  <div class="input-footer">
+    <span class="hint-text">Enter to send </span>
+    <span id="msg-count" style="display:none"></span>
+    <button id="clear-btn" onclick="clearChat()">clear chat</button>
+  </div>
+</div>
+
+<script>
+  var API_URL   = 'https://ofksxuw2re.execute-api.us-east-1.amazonaws.com/Prod';
+  var POOL_ID   = 'us-east-1_eaA3wAMdY';
+  var CLIENT_ID = '753um8hiaacln398llceeavnqm';
+
+  var token      = null;
+  var isGuest    = false;
+  var userEmail  = '';
+  var sessionId  = 'session_' + Date.now();
+  var chatHistory     = [];
+  var firstMsg   = true;
+  var savedEmail = '';
+  var savedPass  = '';
+  var currentCognitoUser = null;
+
+  var pool = new AmazonCognitoIdentity.CognitoUserPool({
+    UserPoolId: POOL_ID,
+    ClientId:   CLIENT_ID
+  });
+
+  window.onload = function() {
+    var existing = pool.getCurrentUser();
+    if (existing) {
+      existing.getSession(function(err, session) {
+        if (!err && session.isValid()) {
+          currentCognitoUser = existing;
+          token     = session.getIdToken().getJwtToken();
+          userEmail = existing.getUsername();
+          openApp(false);
+        }
+      });
+    }
+  };
+
+  function showTab(tab) {
+    document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+    document.getElementById('tab-signup').classList.toggle('active', tab === 'signup');
+    document.getElementById('login-form').style.display  = tab === 'login'  ? 'block' : 'none';
+    document.getElementById('signup-form').style.display = tab === 'signup' ? 'block' : 'none';
+    document.getElementById('verify-form').style.display = 'none';
+    showMsg('', '');
+  }
+
+  function showMsg(text, type) {
+    var el = document.getElementById('auth-message');
+    el.textContent = text;
+    el.className = type ? 'msg-' + type : '';
+  }
+
+  function login() {
+    var email = document.getElementById('login-email').value.trim();
+    var pass  = document.getElementById('login-pass').value;
+    if (!email || !pass) { showMsg('Please fill in all fields', 'error'); return; }
+    showMsg('Signing in...', 'success');
+
+    var authDetails = new AmazonCognitoIdentity.AuthenticationDetails({ Username: email, Password: pass });
+    var user = new AmazonCognitoIdentity.CognitoUser({ Username: email, Pool: pool });
+
+    user.authenticateUser(authDetails, {
+      onSuccess: function(session) {
+        currentCognitoUser = user;
+        token     = session.getIdToken().getJwtToken();
+        userEmail = email;
+        openApp(false);
+      },
+      onFailure: function(err) {
+        showMsg(err.message || 'Sign in failed', 'error');
+      }
+    });
+  }
+
+  function signup() {
+    var email = document.getElementById('signup-email').value.trim();
+    var pass  = document.getElementById('signup-pass').value;
+    if (!email || !pass) { showMsg('Please fill in all fields', 'error'); return; }
+    if (pass.length < 8) { showMsg('Password must be at least 8 characters', 'error'); return; }
+    showMsg('Creating account...', 'success');
+
+    savedEmail = email;
+    savedPass  = pass;
+
+    var emailAttr = new AmazonCognitoIdentity.CognitoUserAttribute({ Name: 'email', Value: email });
+
+    pool.signUp(email, pass, [emailAttr], null, function(err, result) {
+      if (err) { showMsg(err.message || 'Sign up failed', 'error'); return; }
+      currentCognitoUser = result.user;
+      document.getElementById('signup-form').style.display = 'none';
+      document.getElementById('verify-form').style.display = 'block';
+      showMsg('Code sent to ' + email, 'success');
+    });
+  }
+
+  function verify() {
+    var code = document.getElementById('verify-code').value.trim();
+    if (!code) { showMsg('Please enter the code', 'error'); return; }
+    showMsg('Verifying...', 'success');
+
+    currentCognitoUser.confirmRegistration(code, true, function(err) {
+      if (err) { showMsg(err.message || 'Verification failed', 'error'); return; }
+
+      var authDetails = new AmazonCognitoIdentity.AuthenticationDetails({ Username: savedEmail, Password: savedPass });
+      currentCognitoUser.authenticateUser(authDetails, {
+        onSuccess: function(session) {
+          token     = session.getIdToken().getJwtToken();
+          userEmail = savedEmail;
+          openApp(false);
+        },
+        onFailure: function() {
+          showMsg('Verified! Please sign in.', 'success');
+          showTab('login');
+        }
+      });
+    });
+  }
+
+  function guestMode() {
+    isGuest   = true;
+    token     = null;
+    userEmail = 'guest';
+    openApp(true);
+  }
+
+  function openApp(guest) {
+    document.getElementById('auth-screen').style.display = 'none';
+    isGuest = guest;
+    var badge = document.getElementById('user-badge');
+    if (guest) {
+      badge.style.backgroundColor = '#1a1a2e';
+      badge.style.borderColor     = '#64748b';
+      badge.style.color           = '#64748b';
+      badge.textContent           = 'guest mode';
+    } else {
+      badge.textContent = userEmail.split('@')[0];
+    }
+  }
+
+  function logout() {
+    if (currentCognitoUser) currentCognitoUser.signOut();
+    currentCognitoUser = null;
+    token = null; isGuest = false; userEmail = '';
+    chatHistory = []; firstMsg = true;
+    clearChat();
+    document.getElementById('auth-screen').style.display = 'flex';
+    showTab('login');
+  }
+
+  function updateCounter() {
+    var count = document.getElementById('msg-count');
+    if (chatHistory.length > 0) {
+      var turns = Math.floor(chatHistory.length / 2);
+      count.textContent = '📎 ' + chatHistory.length + ' msgs · ' + turns + ' turns';
+      count.style.display = 'inline';
+    } else {
+      count.style.display = 'none';
+    }
+  }
+
+  function addMessage(role, text, savedToCloud) {
+    if (firstMsg) {
+      document.getElementById('welcome').style.display = 'none';
+      firstMsg = false;
+    }
+
+    var chatBox = document.getElementById('chat-box');
+    var row = document.createElement('div');
+    row.className = 'msg-row ' + role;
+
+    var avatar = document.createElement('div');
+    avatar.className = 'msg-avatar ' + role;
+    avatar.textContent = role === 'bot' ? '☁️' : '👤';
+
+    var bubble = document.createElement('div');
+    bubble.className = 'msg-bubble ' + role;
+
+    if (role === 'bot') {
+      var name = document.createElement('div');
+      name.className = 'msg-name';
+      name.textContent = 'Cloudy';
+      bubble.appendChild(name);
+    }
+
+    var content = document.createElement('div');
+    content.className = 'msg-content';
+    content.innerHTML = formatText(text);
+    bubble.appendChild(content);
+
+    if (savedToCloud && role === 'bot') {
+      var note = document.createElement('div');
+      note.className = 'save-note';
+      note.textContent = '☁️ saved to your history';
+      bubble.appendChild(note);
+    }
+
+    row.appendChild(avatar);
+    row.appendChild(bubble);
+    chatBox.appendChild(row);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  function showTyping() {
+    if (firstMsg) { document.getElementById('welcome').style.display = 'none'; firstMsg = false; }
+    var chatBox = document.getElementById('chat-box');
+    var row     = document.createElement('div');
+    row.className = 'msg-row bot';
+    row.id        = 'typing';
+
+    var avatar = document.createElement('div');
+    avatar.className  = 'msg-avatar bot';
+    avatar.textContent = '☁️';
+
+    var dots = document.createElement('div');
+    dots.className = 'typing';
+    dots.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+
+    row.appendChild(avatar);
+    row.appendChild(dots);
+    chatBox.appendChild(row);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  function hideTyping() {
+    var el = document.getElementById('typing');
+    if (el) el.remove();
+  }
+
+  function formatText(text) {
+    const lines = text.split('\n');
+    let html = '';
+    let inList = false;
+
+    for (let i = 0; i < lines.length; i++) {
+      let rawLine = lines[i];
+      let line = rawLine.trim();
+
+      if (!line) {
+        if (inList) {
+          html += '</ul>';
+          inList = false;
+        }
+        continue;
+      }
+
+      if (/^Step\s+\d+:/i.test(line)) {
+        if (inList) {
+          html += '</ul>';
+          inList = false;
+        }
+        line = line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        html += `<div class="heading">${line}</div>`;
+        continue;
+      }
+
+      if (/^#{1,3}\s+/.test(line)) {
+        if (inList) {
+          html += '</ul>';
+          inList = false;
+        }
+        line = line.replace(/^#{1,3}\s+/, '');
+        line = line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        html += `<div class="heading">${line}</div>`;
+        continue;
+      }
+
+      if (/^[-•]\s+/.test(line)) {
+        if (!inList) {
+          html += '<ul>';
+          inList = true;
+        }
+        line = line.replace(/^[-•]\s+/, '');
+        line = line
+          .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+          .replace(/`([^`]+)`/g, '<code>$1</code>');
+        html += `<li>${line}</li>`;
+        continue;
+      }
+
+      if (inList) {
+        html += '</ul>';
+        inList = false;
+      }
+
+      line = line
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/`([^`]+)`/g, '<code>$1</code>');
+
+      html += `<p>${line}</p>`;
+    }
+
+    if (inList) html += '</ul>';
+
+    return html;
+  }
+
+  async function sendMessage() {
+    var input = document.getElementById('user-input');
+    var text  = input.value.trim();
+    if (!text) return;
+
+    input.value = '';
+    input.style.height = 'auto';
+    document.getElementById('send-btn').disabled = true;
+
+    addMessage('user', text, false);
+    chatHistory.push({ role: 'user', content: text });
+    updateCounter();
+    showTyping();
+
+    try {
+      var body = {
+        prompt:    text,
+        sessionId: sessionId,
+        isGuest:   isGuest,
+        authToken: token,
+        messages:  isGuest ? chatHistory : []
+      };
+
+      var response = await fetch(API_URL, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(body)
+      });
+
+      var data  = await response.json();
+      hideTyping();
+
+      var reply = data.response || data.error || 'Something went wrong';
+      addMessage('bot', reply, data.savedToCloud || false);
+      chatHistory.push({ role: 'assistant', content: reply });
+      updateCounter();
+
+    } catch (err) {
+      hideTyping();
+      addMessage('bot', '⚠️ Could not reach the backend. Check your Invoke URL.', false);
+      console.log('Error:', err);
+    }
+
+    document.getElementById('send-btn').disabled = false;
+    input.focus();
+  }
+
+  function sendQuick(text) {
+    document.getElementById('user-input').value = text;
+    sendMessage();
+  }
+
+  function clearChat() {
+    chatHistory = []; firstMsg = true;
+    sessionId = 'session_' + Date.now();
+    var rows = document.getElementById('chat-box').querySelectorAll('.msg-row');
+    rows.forEach(function(row) { row.remove(); });
+    document.getElementById('welcome').style.display = 'flex';
+    updateCounter();
+  }
+
+  document.getElementById('user-input').addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 140) + 'px';
+  });
+
+  document.getElementById('user-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+  });
+
+  document.getElementById('send-btn').addEventListener('click', sendMessage);
+</script>
+</body>
+</html>
