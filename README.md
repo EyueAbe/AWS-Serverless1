@@ -25,6 +25,10 @@ This architecture allows the application to scale automatically while minimizing
 
 
 
+
+
+
+
 AWS Services Used:
 - AWS Amplify: Hosts the frontend and delivers the static website globally through AWS infrastructure. Deployments can be triggered directly from a GitHub repository.
 - Amazon Cognito: Provides authentication for users. Registered users can log in and have their chat history associated with their account.
@@ -36,6 +40,9 @@ AWS Services Used:
 - Amazon CloudWatch: Automatically captures logs from Lambda executions for debugging and monitoring.
 
 
+
+
+
 Key Features:
 - User authentication using Amazon Cognito
 - Guest mode for one time chat sessions
@@ -45,8 +52,10 @@ Key Features:
 - Clean chat interface with Markdown formatted responses
 
 
-Deployment Overview:
 
+
+
+Deployment Overview:
 1. Create DynamoDB Table
   - Create a table named cloudy-chat-history.
   - Partition key (userId)
@@ -81,8 +90,14 @@ These values are required by the frontend.
 
 
 
+
+
+
 Cost Considerations:
 The application is designed to run primarily within AWS Free Tier limits for development and demonstration purposes. Most services such as Lambda, API Gateway, and DynamoDB have generous free usage tiers. The main cost comes from Amazon Bedrock inference, which charges per request to the model. For light usage the cost remains minimal.
+
+
+
 
 
 
@@ -104,27 +119,20 @@ Lambda stores updated history in DynamoDB
 Response returned to frontend
 
 
-  Technology Stack
-- Layer	           │   Technology
---------------------------------------------
-- Frontend	       │   HTML, CSS, JavaScript
-- Authentication	 │   Amazon Cognito
-- Hosting	         │   AWS Amplify
-- API Layer	       │   Amazon API Gateway
-- Backend	         │   AWS Lambda 
-- Database	       │   Amazon DynamoDB
-- AI Model	       │   Amazon Bedrock (Claude Haiku)
-- Monitoring	     │   Amazon CloudWatch
 
 
-Repository Structure:
-Cloudy/
-│
-├── Cloudy.html
-│   Frontend application
-│
-├── lambda_function.py
-│   Backend Lambda function
-│
-└── README.md
-    Project documentation
+
+  
+- Layer	             │         Technology
+////////////////////////////////////////////////////
+- Frontend	         │         HTML, CSS, JavaScript
+- Authentication	   │         Amazon Cognito
+- Hosting	           │         AWS Amplify
+- API Layer	         │         Amazon API Gateway
+- Backend	           │         AWS Lambda 
+- Database	         │         Amazon DynamoDB
+- AI Model	         │         Amazon Bedrock (Claude Haiku)
+- Monitoring	       │         Amazon CloudWatch
+
+
+
