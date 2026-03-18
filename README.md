@@ -10,8 +10,9 @@ Tech Stack: AWS Lambda, API Gateway, Amazon Bedrock, Cognito, DynamoDB, Amplify
 
 
 Preview
-
-<img width="520" height="691" alt="image" src="https://github.com/user-attachments/assets/367f83e5-4dd2-45a5-8def-b8e90c44a0ef" />
+<p align="center">
+  <img width="520" height="691" alt="image" src="https://github.com/user-attachments/assets/367f83e5-4dd2-45a5-8def-b8e90c44a0ef" />
+</p>
 <img width="1818" height="808" alt="image" src="https://github.com/user-attachments/assets/c470d7e1-aaec-4a1c-8593-8462dae4b490" />
 
 
