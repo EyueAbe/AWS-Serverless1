@@ -10,34 +10,39 @@ Tech Stack: AWS Lambda, API Gateway, Amazon Bedrock, Cognito, DynamoDB, Amplify
 
 
 Preview
-<img width="620" height="791" alt="image" src="https://github.com/user-attachments/assets/367f83e5-4dd2-45a5-8def-b8e90c44a0ef" />
-<img width="1918" height="908" alt="image" src="https://github.com/user-attachments/assets/c470d7e1-aaec-4a1c-8593-8462dae4b490" />
+
+<img width="520" height="691" alt="image" src="https://github.com/user-attachments/assets/367f83e5-4dd2-45a5-8def-b8e90c44a0ef" />
+<img width="1818" height="808" alt="image" src="https://github.com/user-attachments/assets/c470d7e1-aaec-4a1c-8593-8462dae4b490" />
 
 
-🏗️ Architecture Overview
-<img width="1336" height="752" alt="image" src="https://github.com/user-attachments/assets/7567daba-b1f3-4e8c-8907-6b04598283ca" />
+
+
+
+Architecture Overview
+
+<img width="1236" height="652" alt="image" src="https://github.com/user-attachments/assets/7567daba-b1f3-4e8c-8907-6b04598283ca" />
 This architecture allows the application to scale automatically while minimizing operational overhead.
 
 
 
-AWS Services Used
-AWS Amplify: Hosts the frontend and delivers the static website globally through AWS infrastructure. Deployments can be triggered directly from a GitHub repository.
-Amazon Cognito: Provides authentication for users. Registered users can log in and have their chat history associated with their account.
-Amazon API Gateway: Acts as the entry point for all API requests. It receives chat messages from the frontend and forwards them to the Lambda backend.
-AWS Lambda: Runs the backend logic in Python. Lambda processes incoming requests, retrieves chat history when needed, invokes the Bedrock model, and returns responses to the client.
-Amazon Bedrock: Provides access to foundation models. Cloudy uses the Claude Haiku model to generate responses to AWS related questions.
-Amazon DynamoDB: Stores conversation history for authenticated users. Each conversation session is stored using the user ID and session ID as keys.
-AWS IAM: Manages permissions between services. Lambda is granted permission to invoke Bedrock and read and write data in DynamoDB.
-Amazon CloudWatch: Automatically captures logs from Lambda executions for debugging and monitoring.
+AWS Services Used:
+- AWS Amplify: Hosts the frontend and delivers the static website globally through AWS infrastructure. Deployments can be triggered directly from a GitHub repository.
+- Amazon Cognito: Provides authentication for users. Registered users can log in and have their chat history associated with their account.
+- Amazon API Gateway: Acts as the entry point for all API requests. It receives chat messages from the frontend and forwards them to the Lambda backend.
+- AWS Lambda: Runs the backend logic in Python. Lambda processes incoming requests, retrieves chat history when needed, invokes the Bedrock model, and returns responses to the client.
+- Amazon Bedrock: Provides access to foundation models. Cloudy uses the Claude Haiku model to generate responses to AWS related questions.
+- Amazon DynamoDB: Stores conversation history for authenticated users. Each conversation session is stored using the user ID and session ID as keys.
+- AWS IAM: Manages permissions between services. Lambda is granted permission to invoke Bedrock and read and write data in DynamoDB.
+- Amazon CloudWatch: Automatically captures logs from Lambda executions for debugging and monitoring.
 
 
 Key Features:
--  User authentication using Amazon Cognito
--  Guest mode for one time chat sessions
--  Conversation history stored in DynamoDB
--  AI responses generated using Amazon Bedrock
--  Serverless architecture with no infrastructure management
--  Clean chat interface with Markdown formatted responses
+- User authentication using Amazon Cognito
+- Guest mode for one time chat sessions
+- Conversation history stored in DynamoDB
+- AI responses generated using Amazon Bedrock
+- Serverless architecture with no infrastructure management
+- Clean chat interface with Markdown formatted responses
 
 
 Deployment Overview:
@@ -99,17 +104,17 @@ Lambda stores updated history in DynamoDB
 Response returned to frontend
 
 
-        Technology Stack
-Layer	           │   Technology
+  Technology Stack
+- Layer	           │   Technology
 --------------------------------------------
-Frontend	       │   HTML, CSS, JavaScript
-Authentication	 │   Amazon Cognito
-Hosting	         │   AWS Amplify
-API Layer	       │   Amazon API Gateway
-Backend	         │   AWS Lambda 
-Database	       │   Amazon DynamoDB
-AI Model	       │   Amazon Bedrock (Claude Haiku)
-Monitoring	     │   Amazon CloudWatch
+- Frontend	       │   HTML, CSS, JavaScript
+- Authentication	 │   Amazon Cognito
+- Hosting	         │   AWS Amplify
+- API Layer	       │   Amazon API Gateway
+- Backend	         │   AWS Lambda 
+- Database	       │   Amazon DynamoDB
+- AI Model	       │   Amazon Bedrock (Claude Haiku)
+- Monitoring	     │   Amazon CloudWatch
 
 
 Repository Structure:
