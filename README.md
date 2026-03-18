@@ -128,7 +128,7 @@ Response returned to frontend
 - Authentication	 ---->        Amazon Cognito
 - Hosting	         ---->        AWS Amplify
 - API Layer	       ---->        Amazon API Gateway
-- Backend	         ---->        AWS Lambda 
+- Backend	         ---->        AWS Lambda(python) 
 - Database	       ---->        Amazon DynamoDB
 - AI Model	       ---->        Amazon Bedrock (Claude Haiku)
 - Monitoring	     ---->        Amazon CloudWatch
