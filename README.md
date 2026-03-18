@@ -123,16 +123,14 @@ Response returned to frontend
 
 
   
-- Layer	             │         Technology
-////////////////////////////////////////////////////
-- Frontend	         │         HTML, CSS, JavaScript
-- Authentication	   │         Amazon Cognito
-- Hosting	           │         AWS Amplify
-- API Layer	         │         Amazon API Gateway
-- Backend	           │         AWS Lambda 
-- Database	         │         Amazon DynamoDB
-- AI Model	         │         Amazon Bedrock (Claude Haiku)
-- Monitoring	       │         Amazon CloudWatch
+- Frontend	       ---->        HTML, CSS, JavaScript
+- Authentication	 ---->        Amazon Cognito
+- Hosting	         ---->        AWS Amplify
+- API Layer	       ---->        Amazon API Gateway
+- Backend	         ---->        AWS Lambda 
+- Database	       ---->        Amazon DynamoDB
+- AI Model	       ---->        Amazon Bedrock (Claude Haiku)
+- Monitoring	     ---->        Amazon CloudWatch
 
 
 
